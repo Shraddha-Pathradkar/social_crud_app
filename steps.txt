@@ -1,0 +1,58 @@
+create a master folder
+create 2 folders for front end and backend
+
+******** to solve the cors origin error on front end********
+in package.json add --
+ "private": true,
+  "proxy": "http://localhost:5000", //*********
+  "dependencies": {
+******** to solve the cors origin error on front end********
+
+
+front end--
+1. npx create-react-app ./
+2. npm install axios moment react-file-base 64 redux redux-thunk
+ //axios- to make request
+ //moment- library to work with time and date
+ //react-file-base 64 - to convert the images 
+ //redux
+ //redux-thunk- used for asynchronous actions using redux
+
+
+
+ 
+backend -- 
+1. create new file index.js
+2. npm init -y // initialize empty package json
+3. npm install body-parser cors express mongoose nodemon // body-parser allow us to send post request, cors allow us to do cross origin request, 
+ express as a framework for creating routing for app, mongoose to create models for posts, nodemom using it we will not need to restart the server 
+  everytime when we make the change.
+
+
+4. Import all the packages to the index.js file.
+//make these changes to package.json file
+"main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+// to use the import statements instead of require statements add "type":"module", below main in package.json file
+
+5. make connection to mongodb in indexjs
+6. Now define the routes, set the routes
+7. Import the routes to the index.js file and set a prefix url
+8. make a separte file for controllers for the logic of the routes functions
+9. create a new folder for models.
+ // models will use the mongoose schema which will tell us the uniformity for the database. What fields it should have and their types.
+
+
+
+mongodb atlab--
+1. create new project
+2. create new cluster
+3. go to database access setup
+4. go to network access setup
+5. after cluster is created click the connect button on the cluster.
+6. connect to application.
+7. copy connection string.
+9.
