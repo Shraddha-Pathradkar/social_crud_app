@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 import { memories } from "./Images/Images";
 import Posts from "./Components/Posts/Posts";
@@ -6,15 +6,18 @@ import From from "./Components/Forms/Form";
 import useStyles from "./Styles";
 import { getPosts } from "./Redux/Actions/index";
 
-import { useDispatch } from "react-redux"; // use to dispatch an action
+import { useDispatch, useSelector } from "react-redux"; // use to dispatch an action
 
 // using material ui from the frontend
 const App = () => {
+  const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const postReducerResponse = useSelector((state) => state.postReducer);
+
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [dispatch, postReducerResponse]);
   return (
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">
@@ -37,10 +40,10 @@ const App = () => {
             spacing={3}
           >
             <Grid item xs={12} sm={7}>
-              <Posts />
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={4}>
-              <From />
+              <From currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>

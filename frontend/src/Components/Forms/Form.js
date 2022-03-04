@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import useStyles from "./Styles";
 import FileBase from "react-file-base64"; // converts filedata to string
-import { useDispatch } from "react-redux";
-import { createPost } from "../../Redux/Actions/index";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost, updatePost } from "../../Redux/Actions/index";
 
-const From = () => {
+const From = ({ currentId, setCurrentId }) => {
   const [requestObj, setRequestObj] = useState({
     creator: "",
     title: "",
@@ -14,10 +14,37 @@ const From = () => {
   });
 
   const classes = useStyles();
+  const postReducerResponse = useSelector((state) => state.postReducer);
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(requestObj));
+
+    if (currentId) dispatch(updatePost(currentId, requestObj));
+    else dispatch(createPost(requestObj));
+
+    handleClear();
+  };
+  useEffect(() => {
+    if (currentId) {
+      let editPost = postReducerResponse.find((post) => post._id === currentId);
+      setRequestObj({
+        creator: editPost.creator,
+        title: editPost.title,
+        message: editPost.message,
+        tags: editPost.tags,
+        selectedFile: editPost.selectedFile,
+      });
+    }
+  }, [currentId, postReducerResponse]);
+  const handleClear = () => {
+    setCurrentId(null);
+    setRequestObj({
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+    });
   };
   return (
     <Paper className={classes.paper}>
@@ -27,7 +54,9 @@ const From = () => {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">Creating a memory</Typography>
+        <Typography variant="h6">
+          {currentId ? "Editing a memory" : "Creating a memory"}
+        </Typography>
         <TextField
           fullWidth
           name="creator"
@@ -92,14 +121,7 @@ const From = () => {
           color="secondary"
           size="small"
           fullWidth
-          onClick={() =>
-            setRequestObj({
-              creator: "",
-              title: "",
-              message: "",
-              tags: "",
-            })
-          }
+          onClick={handleClear}
         >
           Clear
         </Button>
