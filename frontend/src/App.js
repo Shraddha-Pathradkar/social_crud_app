@@ -6,18 +6,17 @@ import From from "./Components/Forms/Form";
 import useStyles from "./Styles";
 import { getPosts } from "./Redux/Actions/index";
 
-import { useDispatch, useSelector } from "react-redux"; // use to dispatch an action
+import { useDispatch } from "react-redux"; // use to dispatch an action
 
 // using material ui from the frontend
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const postReducerResponse = useSelector((state) => state.postReducer);
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch, postReducerResponse]);
+  }, [dispatch]);
   return (
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">

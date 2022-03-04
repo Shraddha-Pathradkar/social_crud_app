@@ -92,9 +92,10 @@ const From = ({ currentId, setCurrentId }) => {
           name="tags"
           variant="outlined"
           label="Tags"
+          placeholder="Comma seprated tags"
           value={requestObj.tags}
           onChange={(e) =>
-            setRequestObj({ ...requestObj, tags: e.target.value })
+            setRequestObj({ ...requestObj, tags: e.target.value.split(",") })
           }
         />
         <div className={classes.fileInput}>

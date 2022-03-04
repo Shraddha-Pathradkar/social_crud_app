@@ -48,6 +48,7 @@ backend --
 
 
 mongodb atlab--
+
 1. create new project
 2. create new cluster
 3. go to database access setup
@@ -55,4 +56,17 @@ mongodb atlab--
 5. after cluster is created click the connect button on the cluster.
 6. connect to application.
 7. copy connection string.
-9.
+
+
+Make the enviroment variables:
+
+1. make .env file in backend folder.
+2. write port number and mongodb string to .env file( which will not be posted to github)
+3. npm i dotenv
+4. import dotenv
+5. dotenv.config()
+
+
+deployment of backend:
+
+1. 
