@@ -39,7 +39,7 @@ const Post = ({ post, setCurrentId }) => {
             setCurrentId(post._id);
           }}
         >
-          <MoreHorizIcon fontSize="default" />
+          <MoreHorizIcon fontSize="medium" />
         </Button>
       </div>
       <div className={classes.details}>
