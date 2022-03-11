@@ -4,4 +4,6 @@ export const actionName = {
   update: "UPDATE",
   likesUpdate: "LIKESUPDATE",
   delete: "DELETE",
+  login: "LOGIN",
+  logout: "LOGOUT",
 };

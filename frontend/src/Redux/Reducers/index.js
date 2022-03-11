@@ -22,4 +22,33 @@ const postReducer = (state = [], action) => {
   }
 };
 
-export default combineReducers({ postReducer: postReducer });
+const googleLogin = (state = { payload: null }, action) => {
+  switch (action.type) {
+    case actionName.login:
+      localStorage.setItem(
+        "userDetails",
+        JSON.stringify({ ...action?.payload })
+      );
+      return { ...state, payload: action?.payload };
+
+    default:
+      return state;
+  }
+};
+
+const logout = (state = { payload: null }, action) => {
+  switch (action.type) {
+    case actionName.logout:
+      localStorage.clear();
+      return { ...state, payload: null };
+
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  postReducer: postReducer,
+  googleLoginReducer: googleLogin,
+  logoutReducer: logout,
+});
